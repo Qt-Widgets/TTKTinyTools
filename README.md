@@ -33,11 +33,25 @@ Module
 | TTKUrlEncode  | Qt URL转码     | 完成     |
 | TTKHashTransform  | Qt Hash转换       |   完成   |
 | TTKTimestampTransform  | Qt Timestamp转码     |   完成   |
+| TTKCodeLines  | Qt 代码统计行数     |   完成   |
+| TTKCodeCount  | Qt 代码统计行数     |   完成   |
+| TTKWebPMaker  | Qt WebP制作器       |   完成   |
+| TTKFontPng  | Qt 字体转PNG     |   完成   |
+| TTKBarcodeMaker  | Qt 条形码制作     |   完成   |
+| TTKQRCodeMaker  | Qt 二维码制作     |   完成   |
+| TTKQRCodeReader  | Qt 二维码解码     |   完成   |
+| TTKIconMaker  | Qt 图标生成     |   完成   |
+| TTKCPUMemery  | Qt CPU内存     |   完成   |
+| TTKChinese2Pinyin  | Qt 汉字转拼音     |   完成   |
+| TTKImageView  | Qt 图片浏览器     |   完成   |
+| TTKGaussianBlur  | Qt 图片高斯模糊     |   完成   |
+| TTKWaterWave  | Qt 图片水波效果     |   完成   |
+| TTKNetTraffic  | Qt CPU内存网速显示     |   完成   |
 
 Copyright
 -------
  * This file is part of the TTK Tiny Tools project.
- * Copyright (c) 2015 - 2019 Greedysky Studio.
+ * Copyright (c) 2015 - 2020 Greedysky Studio.
  * mail: greedysky@163.com.
  
 How To Contribute

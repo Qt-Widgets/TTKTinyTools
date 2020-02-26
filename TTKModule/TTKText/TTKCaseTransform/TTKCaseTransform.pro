@@ -1,6 +1,6 @@
 # =================================================
 # * This file is part of the TTK Tiny Tools project
-# * Copyright (C) 2015 - 2019 Greedysky Studio
+# * Copyright (C) 2015 - 2020 Greedysky Studio
 #
 # * This program is free software; you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License as published by
@@ -18,8 +18,8 @@
 
 include($$PWD/../../../TTKTinyTools.pri)
 
-win32:TARGET = ../../../../bin/TTKCaseTransform
-unix:TARGET = ../../../lib/TTKCaseTransform
+win32:TARGET = ../../../../bin/$$TTKTinyTools/TTKCaseTransform
+unix:TARGET = ../../../lib/$$TTKTinyTools/TTKCaseTransform
 
 SOURCES += \
     main.cpp \
