@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,10 +19,9 @@
  * with this program; If not, see <http://www.gnu.org/licenses/>.
  ================================================= */
 
-#include "ttkglobal.h"
 #include "ttkglobaldefine.h"
 
-class TTK_CORE_EXPORT MainWindow
+class TTK_MODULE_EXPORT MainWindow
 {
 public:
     inline QString source() const { return m_source; }
@@ -38,7 +37,7 @@ public:
     void calculateMD4();
     void calculateMD5();
     void calculateSha1();
-#ifdef TTK_GREATER_NEW
+#if TTK_QT_VERSION_CHECK(5,0,0)
     void calculateSha224();
     void calculateSha256();
     void calculateSha384();

@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,15 +29,28 @@
 #endif
 
 #define TTK_QT_VERSION_CHECK(major, minor, patch) (QT_VERSION >= QT_VERSION_CHECK(major, minor, patch))
-#if TTK_QT_VERSION_CHECK(5,0,0)
-#  define TTK_GREATER_NEW
-#  if TTK_QT_VERSION_CHECK(5,2,0)
-#    define TTK_WINEXTRAS
-#  else
-#    define TTK_NO_WINEXTRAS
-#  endif
+
+#ifndef qPrintable
+#define qPrintable(s) QString(s).toLocal8Bit().constData()
+#endif
+
+#ifndef qUtf8Printable
+#define qUtf8Printable(s) QString(s).toUtf8().constData()
+#endif
+
+#if !TTK_QT_VERSION_CHECK(5,7,0)
+#define TTK_AS_CONST
+// this adds const to non-const objects (like std::as_const)
+#ifndef Q_CC_MSVC
+template <typename T>
+Q_DECL_CONSTEXPR typename std::add_const<T>::type &qAsConst(T &t) noexcept { return t; }
+// prevent rvalue arguments:
+template <typename T>
+void qAsConst(const T &&) = delete;
 #else
-#  define TTK_NO_WINEXTRAS
+template <typename T>
+Q_DECL_CONSTEXPR typename std::add_const<T>::type &qAsConst(T &t) { return t; }
+#endif
 #endif
 
 //

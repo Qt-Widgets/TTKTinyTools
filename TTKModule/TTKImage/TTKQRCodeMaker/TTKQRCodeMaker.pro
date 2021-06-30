@@ -1,6 +1,6 @@
 # =================================================
 # * This file is part of the TTK Tiny Tools project
-# * Copyright (C) 2015 - 2020 Greedysky Studio
+# * Copyright (C) 2015 - 2021 Greedysky Studio
 #
 # * This program is free software; you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License as published by
@@ -19,8 +19,7 @@
 include($$PWD/../../../TTKTinyTools.pri)
 include($$PWD/../../../TTKThirdParty/TTKThirdParty.pri)
 
-win32:TARGET = ../../../../bin/$$TTKTinyTools/TTKQRCodeMaker
-unix:TARGET = ../../../lib/$$TTKTinyTools/TTKQRCodeMaker
+TARGET = TTKQRCodeMaker
 
 SOURCES += \
     main.cpp \

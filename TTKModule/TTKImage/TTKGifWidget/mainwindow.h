@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,13 @@
 
 #include "gif.h"
 #include <QDialog>
-#include "ttkglobal.h"
 #include "ttkglobaldefine.h"
 
 namespace Ui {
 class MainWindow;
 }
 
-class TTK_CORE_EXPORT MainWindow : public QDialog
+class TTK_MODULE_EXPORT MainWindow : public QDialog
 {
     Q_OBJECT
     Q_PROPERTY(int m_borderWidth READ getBorderWidth WRITE setBorderWidth)

@@ -1,6 +1,6 @@
 # =================================================
 # * This file is part of the TTK Tiny Tools project
-# * Copyright (C) 2015 - 2020 Greedysky Studio
+# * Copyright (C) 2015 - 2021 Greedysky Studio
 #
 # * This program is free software; you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License as published by
@@ -20,19 +20,23 @@ QT       += core gui network
 equals(QT_MAJOR_VERSION, 4){
 CONFIG   += gcc
 }
-equals(QT_MAJOR_VERSION, 5){
-QT       += widgets
+greaterThan(QT_MAJOR_VERSION, 4){ #Qt5
+    QT   += widgets
+    equals(QT_MAJOR_VERSION, 6){ #Qt6
+        QT   += core5compat
+    }
 }
 
 TEMPLATE = app
 
-include(TTKVersion.pri)
+include($$PWD/TTKVersion.pri)
+DESTDIR = $$OUT_PWD/../../../bin/$$TTKTinyTools
 
 win32{
-    equals(QT_MAJOR_VERSION, 5){
+    greaterThan(QT_MAJOR_VERSION, 4){
         msvc{
-            LIBS += -L../../../bin/$$TTKTinyTools -lTTKThirdParty
-            CONFIG +=c++11
+            LIBS += -L$$DESTDIR -lTTKThirdParty
+            CONFIG += c++11
             !contains(QMAKE_TARGET.arch, x86_64){
                  #support on windows XP
                  QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
@@ -41,38 +45,29 @@ win32{
         }
 
         gcc{
-            LIBS += -L../../../bin/$$TTKTinyTools -lTTKThirdParty
-            QMAKE_CXXFLAGS += -std=c++11
-            QMAKE_CXXFLAGS += -Wunused-function
-            QMAKE_CXXFLAGS += -Wswitch
+            LIBS += -L$$DESTDIR -lTTKThirdParty
+            QMAKE_CXXFLAGS += -std=c++11 -Wunused-function -Wswitch
         }
     }
 
     equals(QT_MAJOR_VERSION, 4){
         gcc{
-            LIBS += -L../../../bin/$$TTKTinyTools -lTTKThirdParty
-            QMAKE_CXXFLAGS += -std=c++11
-            QMAKE_CXXFLAGS += -Wunused-function
-            QMAKE_CXXFLAGS += -Wswitch
+            LIBS += -L$$DESTDIR -lTTKThirdParty
+            QMAKE_CXXFLAGS += -std=c++11 -Wunused-function -Wswitch
         }
     }
 }
 
 unix:!mac{
-    LIBS += -L../../../lib/$$TTKTinyTools -lTTKThirdParty
-    QMAKE_CXXFLAGS += -std=c++11
-    QMAKE_CXXFLAGS += -Wunused-function
-    QMAKE_CXXFLAGS += -Wswitch
+    LIBS += -L$$DESTDIR -lTTKThirdParty
+    QMAKE_CXXFLAGS += -std=c++11 -Wunused-function  -Wswitch
 }
 
 DEFINES += TTK_LIBRARY
 
 #########################################
-HEADERS += $$PWD/ttkglobal.h
-HEADERS += $$PWD/ttkglobaldefine.h
-INCLUDEPATH += $$PWD
-#########################################
-include($$PWD/TTKQrc/TTKQrc.pri)
+include($$PWD/TTKUi/TTKUi.pri)
+include($$PWD/TTKCommon/TTKCommon.pri)
 #########################################
 win32:RC_FILE = $$PWD/TTKModule/TTKCore.rc
 #########################################

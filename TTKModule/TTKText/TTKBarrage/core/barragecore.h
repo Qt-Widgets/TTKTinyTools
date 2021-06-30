@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,17 +19,32 @@
  * with this program; If not, see <http://www.gnu.org/licenses/>.
  ================================================= */
 
+#include <QDateTime>
 #include <QApplication>
-#include <time.h>
+#include "ttkglobal.h"
+#if TTK_QT_VERSION_CHECK(5,10,0)
+#include <QRandomGenerator>
+#endif
 
 #define BARRAGEPATH     "videobarrage"
 #define BARRAGEPATH_AL  BarrageCore::getAppDir() + BARRAGEPATH
 
 namespace BarrageCore
 {
+    static int random(int value)
+    {
+#if TTK_QT_VERSION_CHECK(5,10,0)
+        return QRandomGenerator::global()->bounded(value);
+#else
+        return qrand() % value;
+#endif
+    }
+
     static void timeSRand()
     {
-        qsrand(time(nullptr));
+#if !TTK_QT_VERSION_CHECK(5,10,0)
+        qsrand(QDateTime::currentMSecsSinceEpoch());
+#endif
     }
 
     static QString getAppDir()

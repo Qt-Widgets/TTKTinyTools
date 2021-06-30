@@ -1,5 +1,5 @@
-#ifndef GAUSSIANBLUR_H
-#define GAUSSIANBLUR_H
+#ifndef TTKGLOBALDEFINE_H
+#define TTKGLOBALDEFINE_H
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
@@ -19,24 +19,12 @@
  * with this program; If not, see <http://www.gnu.org/licenses/>.
  ================================================= */
 
-#include <QImage>
-#include "ttkglobaldefine.h"
+#include "ttkglobal.h"
 
-class TTK_MODULE_EXPORT GaussianBlur
-{
-public:
-    GaussianBlur();
+#ifdef TTK_LIBRARY
+#  define TTK_MODULE_EXPORT Q_DECL_EXPORT
+#else
+#  define TTK_MODULE_EXPORT Q_DECL_IMPORT
+#endif
 
-    void gaussBlur(QImage &img, int radius);
-
-private:
-    void gaussBlur1(int* pix, int w, int h, int radius);
-    void gaussBlur2(int* pix, int w, int h, int radius);
-    void boxBlurH(int* srcPix, int* destPix, int w, int h, int radius);
-    void boxBlurV(int* srcPix, int* destPix, int w, int h, int radius);
-    void boxBlur(int* srcPix, int* destPix, int w, int h, int r);
-    void boxesForGauss(float sigma, int* size, int n);
-
-};
-
-#endif // GAUSSIANBLUR_H
+#endif // TTKGLOBALDEFINE_H

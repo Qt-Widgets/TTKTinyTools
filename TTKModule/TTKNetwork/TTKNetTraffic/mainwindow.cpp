@@ -72,7 +72,7 @@ MainWindow::MainWindow(QWidget *parent)
     move(200, 200);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
-    Qt::WindowFlags flags = 0;
+    Qt::WindowFlags flags = Qt::WindowFlags();
     flags = Qt::Window;
     flags |=Qt::FramelessWindowHint;
     flags |= Qt::WindowStaysOnTopHint;
@@ -146,7 +146,7 @@ void MainWindow::showmem(int value)
 
 void MainWindow::showtop(int value)
 {
-    Qt::WindowFlags flags = 0;
+    Qt::WindowFlags flags = Qt::WindowFlags();
     if(value)
     {
         m_isShowtop = true;
@@ -165,11 +165,19 @@ void MainWindow::showtop(int value)
 }
 
 void MainWindow::mousePressEvent(QMouseEvent *event)
-{
+{ 
+#if TTK_QT_VERSION_CHECK(6,0,0)
+    m_dPos = event->globalPosition().toPoint() - pos();
+#else
     m_dPos = event->globalPos() - pos();
+#endif
 }
 
 void MainWindow::mouseMoveEvent(QMouseEvent *event)
 {
+#if TTK_QT_VERSION_CHECK(6,0,0)
+    move(event->globalPosition().toPoint() - m_dPos);
+#else
     move(event->globalPos() - m_dPos);
+#endif
 }

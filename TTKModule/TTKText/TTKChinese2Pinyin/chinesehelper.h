@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ class ChineseHelperPrivate;
 /*! @brief The class of the simple and traditional chinese characters.
  * @author jiangXiaoBai <2499971906@qq.com>
  */
-class TTK_CORE_EXPORT ChineseHelper
+class TTK_MODULE_EXPORT ChineseHelper
 {
 public:
     /*!

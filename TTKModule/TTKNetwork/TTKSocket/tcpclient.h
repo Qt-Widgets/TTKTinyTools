@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@
 #include <QTcpSocket>
 #include "ttkglobaldefine.h"
 
-typedef struct TTK_CORE_EXPORT ClientData
+typedef struct TTK_MODULE_EXPORT ClientData
 {
     int m_clientID;
     QString m_ip;
     int m_port;
 }ClientData;
 
-class TTK_CORE_EXPORT TcpClient : public QTcpSocket
+class TTK_MODULE_EXPORT TcpClient : public QTcpSocket
 {
     Q_OBJECT
 public:

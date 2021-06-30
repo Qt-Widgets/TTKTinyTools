@@ -29,7 +29,7 @@ typedef unsigned int DecodeHintType;
 class DecodeHints;
 DecodeHints operator | (DecodeHints const&, DecodeHints const&);
 
-class DecodeHints {
+class TTK_MODULE_EXPORT DecodeHints {
  private:
   DecodeHintType hints;
   Ref<ResultPointCallback> callback;

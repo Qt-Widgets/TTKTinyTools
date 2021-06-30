@@ -1,9 +1,9 @@
-#ifndef TTKGLOBALDEFINE_H
-#define TTKGLOBALDEFINE_H
+#ifndef TTKVERSION_H
+#define TTKVERSION_H
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,17 +19,19 @@
  * with this program; If not, see <http://www.gnu.org/licenses/>.
  ================================================= */
 
-#include <QObject>
+//update time 2021.06.26
+#define TTKTOOLS_VERSION_STR    "2.2.0.0"
+#define TTKTOOLS_VERSION_WSTR   L"2.2.0.0"
+#define TTKTOOLS_VER_TIME_STR   "(2021/06/26)"
 
-///
-#ifdef TTK_LIBRARY
-#  define TTK_EXPORT
-#endif
+#define TTKTOOLS_MAJOR_VERSION 2
+#define TTKTOOLS_MIDLE_VERSION 2
+#define TTKTOOLS_MINOR_VERSION 0
+#define TTKTOOLS_PATCH_VERSION 0
 
-#ifdef TTK_EXPORT
-#  define TTK_CORE_EXPORT Q_DECL_EXPORT
-#else
-#  define TTK_CORE_IMPORT Q_DECL_IMPORT
-#endif
+#define TTKTOOLS_VERSION 0x02200
 
-#endif // TTKGLOBALDEFINE_H
+#define TTK_VERSION_CHECK(major, middle, minor, patch) ((major<<12)|(middle<<8)|(minor<<4)|(patch))
+
+#endif // TTKVERSION_H
+

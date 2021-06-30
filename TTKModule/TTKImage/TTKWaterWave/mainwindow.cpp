@@ -37,13 +37,18 @@ void MainWindow::openImage()
     }
 
     m_image.load(path);
-    m_waterWave = new WaterWave((int*)(m_image.bits()), m_image.width(), m_image.height(), m_image.format());
+    m_waterWave = new WaterWave((int*)(m_image.bits()), m_image.width(), m_image.height());
 }
 
 void MainWindow::renderImage()
 {
     m_waterWave->run();
-    memcpy(m_image.bits(), (const uchar*)m_waterWave->pixels(), m_image.byteCount());
+#if TTK_QT_VERSION_CHECK(5,10,0)
+    const int size = m_image.sizeInBytes();
+#else
+    const int size = m_image.byteCount();
+#endif
+    memcpy(m_image.bits(), (const uchar*)m_waterWave->pixels(), size);
     update();
 }
 

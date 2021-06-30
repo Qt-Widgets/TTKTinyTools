@@ -1,6 +1,6 @@
 # =================================================
 # * This file is part of the TTK Tiny Tools project
-# * Copyright (C) 2015 - 2020 Greedysky Studio
+# * Copyright (C) 2015 - 2021 Greedysky Studio
 #
 # * This program is free software; you can redistribute it and/or modify
 # * it under the terms of the GNU General Public License as published by
@@ -17,25 +17,34 @@
 # =================================================
 
 QT       += core gui
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4){ #Qt5
+    QT   += widgets
+    equals(QT_MAJOR_VERSION, 6){ #Qt6
+        QT   += core5compat
+    }
+}
 
-include(../TTKVersion.pri)
-unix:VERSION += $$TTKTinyTools
+include($$PWD/../TTKVersion.pri)
+CONFIG += plugin lib
 
-win32:TARGET = ../../bin/$$TTKTinyTools/TTKThirdParty
-unix:TARGET = ../lib/$$TTKTinyTools/TTKThirdParty
+DESTDIR = $$OUT_PWD/../bin/$$TTKTinyTools
+
+TARGET = TTKThirdParty
+
 TEMPLATE = lib
+DEFINES += TTK_LIBRARY
 
 win32:msvc{
-    CONFIG +=c++11
+    CONFIG += c++11
 }else{
     QMAKE_CXXFLAGS += -std=c++11
 }
 
-include(qrencode/QRencode.pri)
-include(zxing/ZXing.pri)
+INCLUDEPATH += \
+    $$PWD \
+    $$PWD/../TTKCommon
 
-win32{
-    RC_FILE = TTKThirdParty.rc
-}
+include($$PWD/qrencode/QRencode.pri)
+include($$PWD/zxing/ZXing.pri)
 
+win32:RC_FILE = TTKThirdParty.rc

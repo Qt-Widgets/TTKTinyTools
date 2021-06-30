@@ -3,7 +3,7 @@
 
 /* =================================================
  * This file is part of the TTK Tiny Tools project
- * Copyright (C) 2015 - 2020 Greedysky Studio
+ * Copyright (C) 2015 - 2021 Greedysky Studio
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,9 @@
  * with this program; If not, see <http://www.gnu.org/licenses/>.
  ================================================= */
 
+#include "ttkglobaldefine.h"
+
+#define TTK_CREATE_PRIVATE(Class) (*new Class##Private)
 
 #define TTK_DECLARE_PRIVATE(Class) \
     friend class Class##Private; \
@@ -27,11 +30,13 @@
 #define TTK_DECLARE_PUBLIC(Class) \
     friend class Class;
 
-#define TTK_INIT_PRIVATE \
+#define TTK_INIT_PRIVATE(Class) \
+    ttk_d.setPrivate(new Class##Private); \
     ttk_d.setPublic(this);
 
-#define TTK_INIT_PUBLIC(Class) \
-    ttk_d.setPrivate(new Class##Private);
+#define TTK_INIT_PRIVATE_D(PVT) \
+    ttk_d.setPrivate(&PVT); \
+    ttk_d.setPublic(this);
 
 #define TTK_D(Class) Class##Private *const d = static_cast<Class##Private *>(ttk_d())
 #define TTK_Q(Class) Class *const q = static_cast<Class *>(ttk_q())
@@ -40,11 +45,12 @@ template <typename PUB>
 /*! @brief The class of the ttk private base.
  * @author Greedysky <greedysky@163.com>
  */
-class TTKPrivate
+class TTK_MODULE_EXPORT TTKPrivate
 {
 public:
     TTKPrivate() { ttk_q_ptr = nullptr; }
     virtual ~TTKPrivate() { }
+
     inline void setPublic(PUB* pub) { ttk_q_ptr = pub; }
 
 protected:
@@ -59,11 +65,12 @@ template <typename PUB, typename PVT>
 /*! @brief The class of the ttk private interface.
  * @author Greedysky <greedysky@163.com>
  */
-class TTKPrivateInterface
+class TTK_MODULE_EXPORT TTKPrivateInterface
 {
     friend class TTKPrivate<PUB>;
 public:
-    TTKPrivateInterface() { pvt_ptr = new PVT; }
+    TTKPrivateInterface(PVT* pvt) : pvt_ptr(pvt) { }
+    TTKPrivateInterface() : pvt_ptr(nullptr) { }
     ~TTKPrivateInterface() { delete pvt_ptr; }
 
     inline void setPrivate(PVT* pvt) { delete pvt_ptr; pvt_ptr = pvt; }
